@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Background worker: reads the seedbox's folder listings, sorts what it finds
+     into movies, TV and music, and looks up posters and details. -->
+<component name="LibraryTask" extends="Task">
+    <interface>
+        <field id="commands" type="array" alwaysNotify="true" />
+        <field id="status" type="assocarray" alwaysNotify="true" />
+        <field id="library" type="assocarray" alwaysNotify="true" />
+        <field id="metaBatch" type="array" alwaysNotify="true" />
+        <field id="listing" type="assocarray" alwaysNotify="true" />
+        <field id="testResult" type="assocarray" alwaysNotify="true" />
+        <field id="candidates" type="assocarray" alwaysNotify="true" />
+        <field id="probeBatch" type="array" alwaysNotify="true" />
+        <field id="nfoText" type="assocarray" alwaysNotify="true" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/LibraryTask.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Parse.brs" />
+    <script type="text/brightscript" uri="pkg:/components/MediaProbe.brs" />
+</component>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Box://Stream's own on-screen keyboard. Also takes typing from the Roku
+     mobile app's keyboard (it arrives as Lit_ keys). -->
+<component name="Keyboard" extends="Group">
+    <interface>
+        <field id="title" type="string" onChange="onTitle" />
+        <field id="hint" type="string" onChange="onTitle" />
+        <field id="value" type="string" onChange="onValue" />
+        <field id="secure" type="boolean" onChange="buildKeys" />
+        <field id="mode" type="string" value="text" onChange="buildKeys" />
+        <field id="done" type="string" alwaysNotify="true" />
+        <field id="cancel" type="boolean" alwaysNotify="true" />
+        <field id="open" type="boolean" onChange="onOpen" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/Keyboard.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Common.brs" />
+    <children>
+        <Rectangle id="shade" width="1920" height="1080" color="0x000000C8" />
+        <Group id="panelGroup" translation="[330,150]">
+            <Poster id="panel" uri="pkg:/images/panel.9.png" width="1260" height="780" />
+            <Label id="titleLabel" translation="[60,46]" width="1140" color="0xEEF4FFFF" />
+            <Label id="hintLabel" translation="[60,96]" width="1140" color="0x8391AAFF" wrap="true" maxLines="2" />
+            <Poster id="fieldBack" uri="pkg:/images/button.9.png" translation="[54,156]" width="1152" height="86" />
+            <Poster id="fieldGlow" uri="pkg:/images/focus-green.9.png" translation="[18,120]" width="1224" height="158" opacity="0.65" />
+            <Group id="fieldClip" translation="[80,156]" clippingRect="[0,0,1100,86]">
+                <Label id="valueLabel" height="86" vertAlign="center" color="0xFFFFFFFF" />
+                <Rectangle id="caret" width="3" height="44" color="0x39FF88FF" translation="[0,21]" />
+            </Group>
+            <Group id="keys" translation="[62,282]" />
+            <Poster id="keyGlow" uri="pkg:/images/focus.9.png" />
+            <Group id="footer" translation="[250,722]" />
+        </Group>
+        <Timer id="blink" duration="0.55" repeat="true" />
+    </children>
+</component>

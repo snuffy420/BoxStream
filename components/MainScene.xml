@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="MainScene" extends="Scene">
+    <interface>
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Common.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Bidi.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Library.brs" />
+    <script type="text/brightscript" uri="pkg:/components/HomeView.brs" />
+    <script type="text/brightscript" uri="pkg:/components/BrowseViews.brs" />
+    <script type="text/brightscript" uri="pkg:/components/DetailsView.brs" />
+    <script type="text/brightscript" uri="pkg:/components/SettingsView.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Player.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Music.brs" />
+    <children>
+        <Group id="keySink" focusable="true" />
+        <Poster id="background" uri="pkg:/images/background.jpg" width="1920" height="1080" loadWidth="1280" loadHeight="720" />
+        <Poster id="backdrop" width="1920" height="1080" loadDisplayMode="scaleToZoom" loadWidth="1280" loadHeight="720" opacity="0" />
+        <Poster id="backdropFade" uri="pkg:/images/hero-fade.png" width="1920" height="1080" opacity="0" />
+
+        <Group id="views">
+            <!-- Home: hero for the focused title, then rows. -->
+            <Group id="homeView" visible="false">
+                <Poster id="heroLogo" translation="[96,180]" width="620" height="170" loadDisplayMode="scaleToFit" loadWidth="620" loadHeight="170" />
+                <Label id="heroTitle" translation="[96,214]" width="1150" maxLines="1" color="0xFFFFFFFF" />
+                <Label id="heroMeta" translation="[96,370]" width="1150" maxLines="1" color="0x39FF88FF" />
+                <Label id="heroOverview" translation="[96,414]" width="1000" wrap="true" maxLines="3" color="0xC3CDDEFF" />
+                <RowList id="homeRows" translation="[54,560]" itemComponentName="PosterCard" numRows="2" itemSize="[1866,450]" itemSpacing="[0,20]" rowItemSize="[[210,377]]" rowItemSpacing="[[40,0]]" showRowLabel="[true]" rowLabelOffset="[[42,18]]" rowLabelColor="0xC3CDDEFF" focusXOffset="[42]" rowFocusAnimationStyle="floatingFocus" vertFocusAnimationStyle="fixedFocus" drawFocusFeedback="false" />
+                <Group id="homeEmpty" visible="false" translation="[96,600]">
+                    <Poster uri="pkg:/images/panel.9.png" width="1100" height="300" />
+                    <Label id="emptyTitle" translation="[56,52]" width="990" color="0xFFFFFFFF" text="Welcome to Box://Stream" />
+                    <Label id="emptyText" translation="[56,112]" width="990" wrap="true" maxLines="3" color="0xC3CDDEFF" />
+                    <Label id="emptyAction" translation="[56,222]" width="990" color="0x39FF88FF" />
+                </Group>
+            </Group>
+
+            <!-- Movies, TV Shows, Music and search results. -->
+            <Group id="gridView" visible="false">
+                <Label id="gridTitle" translation="[96,170]" width="1200" color="0xFFFFFFFF" />
+                <Label id="gridCount" translation="[96,240]" width="1200" color="0x8391AAFF" />
+                <Group id="sortChip" translation="[1484,186]">
+                    <Poster uri="pkg:/images/pill.9.png" width="340" height="52" />
+                    <Label id="sortLabel" width="340" height="52" horizAlign="center" vertAlign="center" color="0xC3CDDEFF" />
+                </Group>
+                <MarkupGrid id="grid" translation="[52,276]" itemComponentName="PosterCard" itemSize="[298,465]" itemSpacing="[0,0]" numColumns="6" numRows="2" drawFocusFeedback="false" vertFocusAnimationStyle="fixedFocus" />
+                <Label id="gridEmpty" translation="[96,420]" width="1700" wrap="true" color="0x8391AAFF" visible="false" />
+            </Group>
+
+            <Group id="searchView" visible="false">
+                <Label id="searchHeading" translation="[96,170]" width="1200" color="0xFFFFFFFF" text="Search" />
+                <Group id="searchField" translation="[96,250]">
+                    <Poster id="searchGlow" uri="pkg:/images/focus.9.png" translation="[-36,-36]" width="1172" height="156" opacity="0" />
+                    <Poster uri="pkg:/images/button.9.png" width="1100" height="84" />
+                    <Poster uri="pkg:/images/icon-search.png" translation="[26,22]" width="40" height="40" blendColor="0x39FF88FF" />
+                    <Label id="searchText" translation="[90,0]" width="980" height="84" vertAlign="center" color="0xEEF4FFFF" />
+                </Group>
+                <MarkupGrid id="searchGrid" translation="[52,364]" itemComponentName="PosterCard" itemSize="[298,465]" itemSpacing="[0,0]" numColumns="6" numRows="2" drawFocusFeedback="false" vertFocusAnimationStyle="fixedFocus" />
+                <Label id="searchEmpty" translation="[96,420]" width="1700" wrap="true" color="0x8391AAFF" />
+            </Group>
+
+            <Group id="foldersView" visible="false">
+                <Label id="foldersTitle" translation="[96,170]" width="1200" color="0xFFFFFFFF" text="Folders" />
+                <Label id="foldersPath" translation="[96,240]" width="1728" maxLines="1" color="0x8391AAFF" />
+                <MarkupList id="folderList" translation="[72,286]" itemComponentName="ListItem" itemSize="[1776,120]" itemSpacing="[0,0]" numRows="6" drawFocusFeedback="false" vertFocusAnimationStyle="floatingFocus" />
+                <!-- Scroll bar: shows there are more rows below or above. -->
+                <Rectangle id="folderTrack" translation="[1860,292]" width="6" height="708" color="0xFFFFFF1F" visible="false" />
+                <Rectangle id="folderThumb" translation="[1860,292]" width="6" height="100" color="0x39FF88DD" visible="false" />
+                <Label id="foldersEmpty" translation="[96,320]" width="1700" wrap="true" color="0x8391AAFF" />
+            </Group>
+
+            <Group id="settingsView" visible="false">
+                <Label id="settingsTitle" translation="[96,170]" width="1200" color="0xFFFFFFFF" text="Settings" />
+                <MarkupList id="settingsList" translation="[72,256]" itemComponentName="ListItem" itemSize="[1028,138]" itemSpacing="[0,0]" numRows="5" drawFocusFeedback="false" vertFocusAnimationStyle="floatingFocus" />
+                <Rectangle id="settingsTrack" translation="[1112,262]" width="6" height="678" color="0xFFFFFF1F" visible="false" />
+                <Rectangle id="settingsThumb" translation="[1112,262]" width="6" height="100" color="0x39FF88DD" visible="false" />
+                <Group id="aboutPanel" visible="false" translation="[96,170]">
+                    <Poster uri="pkg:/images/panel.9.png" width="1728" height="830" />
+                    <Poster uri="pkg:/images/logo-large.png" translation="[60,60]" width="640" height="120" />
+                    <Label id="aboutVersion" translation="[64,200]" width="900" color="0x39FF88FF" />
+                    <Label id="aboutText" translation="[64,260]" width="1080" wrap="true" maxLines="16" color="0xC3CDDEFF" />
+                    <Group id="aboutQrGroup" translation="[1290,90]">
+                        <Poster id="aboutQr" width="380" height="380" />
+                        <Label id="aboutQrLabel" translation="[-20,396]" width="420" horizAlign="center" wrap="true" maxLines="1" color="0x39FF88FF" />
+                        <Label id="aboutQrUrl" translation="[-60,450]" width="500" horizAlign="center" wrap="true" maxLines="3" color="0x8391AAFF" />
+                    </Group>
+                    <Group id="aboutFooter" translation="[64,756]" />
+                </Group>
+                <Group id="supportPanel" visible="false" translation="[96,170]">
+                    <Poster uri="pkg:/images/panel.9.png" width="1728" height="830" />
+                    <Label id="supportTitle" translation="[64,44]" width="1200" color="0xEEF4FFFF" text="This Roku can play" />
+                    <Label id="supportSub" translation="[64,100]" width="1600" color="0x8391AAFF" />
+                    <Label id="supportVideoHead" translation="[64,160]" text="VIDEO" color="0x39FF88FF" />
+                    <Group id="supportVideo" translation="[64,206]" />
+                    <Label id="supportAudioHead" translation="[880,160]" text="AUDIO" color="0x39FF88FF" />
+                    <Group id="supportAudio" translation="[880,206]" />
+                    <Group id="supportFooter" translation="[64,756]" />
+                </Group>
+                <Group id="settingsSide" translation="[1150,270]">
+                    <Poster uri="pkg:/images/panel.9.png" width="680" height="740" />
+                    <Label id="settingsInfoTitle" translation="[44,40]" width="590" color="0xEEF4FFFF" />
+                    <Label id="settingsInfo" translation="[44,96]" width="590" wrap="true" maxLines="18" color="0xC3CDDEFF" />
+                    <Group id="settingsInfoHint" translation="[44,680]" visible="false" />
+                    <Group id="sideStatus" translation="[44,626]" visible="false">
+                        <Rectangle id="sideStatusDot" translation="[0,12]" width="16" height="16" color="0x39FF88FF" />
+                        <Label id="sideStatusText" translation="[30,0]" width="560" height="40" vertAlign="center" color="0x39FF88FF" />
+                    </Group>
+                    <Group id="sideQrGroup" translation="[210,370]" visible="false">
+                        <Poster id="sideQr" width="260" height="260" />
+                        <Label id="sideQrLabel" translation="[-80,272]" width="420" horizAlign="center" color="0x39FF88FF" />
+                    </Group>
+                </Group>
+            </Group>
+
+            <!-- Details: movie, show or album. The body scrolls up for lower rows. -->
+            <Group id="detailsView" visible="false" clippingRect="[0,138,1920,942]">
+                <Group id="detailsBody">
+                    <Poster id="detailsGlow" uri="pkg:/images/focus-blue.9.png" translation="[54,148]" width="444" height="624" opacity="0.55" />
+                    <Poster id="detailsBezel" uri="pkg:/images/card.9.png" translation="[89,183]" width="374" height="554" />
+                    <Poster id="detailsPoster" translation="[96,190]" width="360" height="540" loadDisplayMode="scaleToZoom" loadWidth="360" loadHeight="540" />
+                    <Poster id="detailsLogo" translation="[530,176]" width="640" height="150" loadDisplayMode="scaleToFit" loadWidth="640" loadHeight="150" />
+                    <Label id="detailsTitle" translation="[530,186]" width="1300" maxLines="1" color="0xFFFFFFFF" />
+                    <Label id="detailsMeta" translation="[530,340]" width="1300" maxLines="1" color="0x39FF88FF" />
+                    <Label id="detailsGenres" translation="[530,382]" width="1300" maxLines="1" color="0x8391AAFF" />
+                    <Label id="detailsOverview" translation="[530,428]" width="1260" wrap="true" maxLines="3" color="0xC3CDDEFF" />
+                    <Label id="detailsCredits" translation="[530,576]" width="1260" wrap="true" maxLines="2" color="0x8391AAFF" />
+                    <Group id="detailsButtons" translation="[530,660]" />
+                    <Label id="sectionA" translation="[96,800]" width="1700" color="0xC3CDDEFF" />
+                    <MarkupGrid id="seasonList" translation="[72,836]" itemComponentName="ListItem" itemSize="[268,110]" itemSpacing="[0,0]" numColumns="7" numRows="1" drawFocusFeedback="false" />
+                    <RowList id="episodeRow" translation="[18,914]" itemComponentName="EpisodeCard" numRows="1" itemSize="[1902,502]" rowItemSize="[[472,472]]" rowItemSpacing="[[0,0]]" showRowLabel="[false]" focusXOffset="[42]" rowFocusAnimationStyle="floatingFocus" drawFocusFeedback="false" />
+                    <MarkupList id="trackList" translation="[506,786]" itemComponentName="ListItem" itemSize="[1348,108]" itemSpacing="[0,0]" numRows="8" drawFocusFeedback="false" vertFocusAnimationStyle="floatingFocus" />
+                    <Label id="sectionB" translation="[96,1400]" width="1700" color="0xC3CDDEFF" />
+                    <RowList id="castRow" translation="[96,1450]" itemComponentName="CastCard" numRows="1" itemSize="[1902,392]" rowItemSize="[[242,362]]" rowItemSpacing="[[0,0]]" showRowLabel="[false]" focusXOffset="[42]" rowFocusAnimationStyle="floatingFocus" drawFocusFeedback="false" />
+                    <Label id="detailsFacts" translation="[96,1800]" width="1728" wrap="true" maxLines="8" color="0x8391AAFF" />
+                </Group>
+                <!-- Albums: songs fade out under the buttons and above the player bar. -->
+                <Poster id="trackFadeTop" uri="pkg:/images/shade-top.png" translation="[0,552]" width="1920" height="40" visible="false" />
+                <Poster id="trackFadeBottom" uri="pkg:/images/shade-bottom.png" translation="[0,904]" width="1920" height="48" visible="false" />
+            </Group>
+        </Group>
+
+        <!-- Top bar: logo, tabs, status and clock. -->
+        <Group id="topBar">
+            <Poster uri="pkg:/images/shade-top.png" width="1920" height="200" />
+            <Poster id="logo" uri="pkg:/images/logo.png" translation="[64,42]" width="335" height="63" />
+            <Group id="tabs" translation="[470,48]" />
+            <Group id="sourceChip" translation="[64,112]" visible="false">
+                <Poster uri="pkg:/images/pill.9.png" width="335" height="38" />
+                <Label id="sourceLabel" width="335" height="38" horizAlign="center" vertAlign="center" color="0x39FF88FF" />
+            </Group>
+            <Label id="statusLabel" translation="[1100,126]" width="756" horizAlign="right" maxLines="1" color="0x8391AAFF" />
+            <Label id="clockLabel" translation="[1690,52]" width="166" horizAlign="right" color="0xEEF4FFFF" />
+        </Group>
+
+        <!-- Music: a slim now-playing bar along the bottom. -->
+        <Group id="miniPlayer" visible="false" translation="[0,964]">
+            <Poster uri="pkg:/images/shade-bottom.png" translation="[0,-60]" width="1920" height="176" />
+            <Poster uri="pkg:/images/panel.9.png" translation="[60,0]" width="1800" height="104" />
+            <Poster id="miniFocus" uri="pkg:/images/focus-green.9.png" translation="[50,-10]" width="1820" height="124" visible="false" />
+            <Group id="miniHints" translation="[548,35]" visible="false" />
+            <Poster id="miniArt" translation="[84,12]" width="80" height="80" loadDisplayMode="scaleToZoom" loadWidth="80" loadHeight="80" />
+            <Poster id="miniIcon" translation="[188,36]" width="32" height="32" uri="pkg:/images/icon-pause.png" blendColor="0x39FF88FF" />
+            <Label id="miniTitle" translation="[240,18]" width="900" maxLines="1" color="0xFFFFFFFF" />
+            <Label id="miniArtist" translation="[240,54]" width="900" maxLines="1" color="0x8391AAFF" />
+            <Poster uri="pkg:/images/track.9.png" translation="[1180,46]" width="460" height="10" />
+            <Poster id="miniBar" uri="pkg:/images/neon-bar.9.png" translation="[1180,46]" width="0" height="10" />
+            <Label id="miniTime" translation="[1660,34]" width="170" horizAlign="right" color="0xC3CDDEFF" />
+        </Group>
+
+        <!-- The video player and its own controls. -->
+        <Group id="player" visible="false">
+            <Rectangle width="1920" height="1080" color="0x000000FF" />
+            <Video id="video" width="1920" height="1080" enableUI="false" />
+            <!-- Subtitles drawn by Box://Stream: four dark copies make the outline. -->
+            <Group id="subLayer">
+                <!-- Picture subtitles (PGS), placed where the disc puts them. -->
+                <Poster id="subPic1" visible="false" />
+                <Poster id="subPic2" visible="false" />
+                <!-- Loads the next picture ahead of time, so it appears on its frame. -->
+                <Poster id="subPicNext" opacity="0" />
+                <Label id="subEdge1" translation="[137,617]" width="1646" height="360" horizAlign="center" vertAlign="bottom" wrap="true" maxLines="4" color="0x000000E6" />
+                <Label id="subEdge2" translation="[143,617]" width="1646" height="360" horizAlign="center" vertAlign="bottom" wrap="true" maxLines="4" color="0x000000E6" />
+                <Label id="subEdge3" translation="[137,623]" width="1646" height="360" horizAlign="center" vertAlign="bottom" wrap="true" maxLines="4" color="0x000000E6" />
+                <Label id="subEdge4" translation="[143,623]" width="1646" height="360" horizAlign="center" vertAlign="bottom" wrap="true" maxLines="4" color="0x000000E6" />
+                <Label id="subText" translation="[140,620]" width="1646" height="360" horizAlign="center" vertAlign="bottom" wrap="true" maxLines="4" color="0xFFFFFFFF" />
+            </Group>
+            <Group id="playerSpinner" visible="false" translation="[960,540]">
+                <Poster id="spinnerRing" uri="pkg:/images/mark.png" translation="[-64,-64]" width="128" height="128" scaleRotateCenter="[64,64]" />
+                <Label id="spinnerText" translation="[-300,90]" width="600" horizAlign="center" color="0xC3CDDEFF" />
+            </Group>
+            <Group id="playerOverlay" visible="false">
+                <Poster uri="pkg:/images/shade-top.png" width="1920" height="260" />
+                <Poster uri="pkg:/images/shade-bottom.png" translation="[0,700]" width="1920" height="380" />
+                <Label id="playerTitle" translation="[96,60]" width="1400" maxLines="1" color="0xFFFFFFFF" />
+                <Label id="playerSubtitle" translation="[96,126]" width="1400" maxLines="1" color="0x39FF88FF" />
+                <Group id="playerBadges" translation="[96,184]" />
+                <Label id="playerClock" translation="[1500,66]" width="324" horizAlign="right" color="0xEEF4FFFF" />
+                <Group id="playerBar" translation="[96,864]">
+                    <Poster uri="pkg:/images/panel.9.png" translation="[-26,-26]" width="1780" height="190" />
+                    <Poster id="playIcon" uri="pkg:/images/icon-pause.png" translation="[14,20]" width="46" height="46" blendColor="0x39FF88FF" />
+                    <Label id="elapsedLabel" translation="[84,24]" width="150" color="0xEEF4FFFF" />
+                    <Poster id="barTrack" uri="pkg:/images/track.9.png" translation="[250,38]" width="1230" height="12" />
+                    <Poster id="barBuffer" uri="pkg:/images/track.9.png" translation="[250,38]" width="0" height="12" blendColor="0x8FA6C8FF" />
+                    <Poster id="barFill" uri="pkg:/images/neon-bar.9.png" translation="[250,37]" width="0" height="14" />
+                    <Poster id="barKnob" uri="pkg:/images/focus-green.9.png" translation="[250,-4]" width="94" height="94" />
+                    <Label id="seekLabel" translation="[250,-46]" width="160" horizAlign="center" color="0x39FF88FF" visible="false" />
+                    <Label id="remainLabel" translation="[1500,24]" width="150" horizAlign="right" color="0xC3CDDEFF" />
+                    <Group id="playerHints" translation="[14,92]" />
+                    <Label id="endsLabel" translation="[1100,94]" width="550" horizAlign="right" color="0x8391AAFF" />
+                </Group>
+            </Group>
+            <Group id="upNext" visible="false" translation="[1240,620]">
+                <Poster uri="pkg:/images/panel.9.png" width="600" height="252" />
+                <Poster id="upNextGlow" uri="pkg:/images/focus.9.png" translation="[-36,-36]" width="672" height="324" opacity="0.8" />
+                <Label id="upNextLabel" translation="[36,30]" width="530" color="0x39FF88FF" text="UP NEXT" />
+                <Label id="upNextTitle" translation="[36,70]" width="530" maxLines="2" wrap="true" color="0xFFFFFFFF" />
+                <Label id="upNextCount" translation="[36,156]" width="530" color="0xC3CDDEFF" />
+                <Group id="upNextHints" translation="[36,198]" />
+            </Group>
+            <Group id="playerError" visible="false" translation="[460,380]">
+                <Poster uri="pkg:/images/panel.9.png" width="1000" height="300" />
+                <Label id="playerErrorTitle" translation="[50,46]" width="900" color="0xFF5C7AFF" text="Can't play this file" />
+                <Label id="playerErrorText" translation="[50,104]" width="900" wrap="true" maxLines="4" color="0xC3CDDEFF" />
+            </Group>
+        </Group>
+
+        <Group id="toast" visible="false" translation="[0,140]">
+            <Poster id="toastBack" uri="pkg:/images/pill.9.png" height="60" />
+            <Label id="toastLabel" height="60" horizAlign="center" vertAlign="center" color="0xEEF4FFFF" />
+        </Group>
+
+        <!-- Media info: a scrolling sheet of everything the file's headers say. -->
+        <Group id="infoSheet" visible="false">
+            <Rectangle width="1920" height="1080" color="0x00000099" />
+            <Poster uri="pkg:/images/panel.9.png" translation="[880,-20]" width="1080" height="1120" />
+            <Rectangle translation="[890,40]" width="3" height="1000" color="0x39FF8866" />
+            <Label id="infoTitle" translation="[950,70]" width="900" color="0xEEF4FFFF" text="Media info" />
+            <Label id="infoSubtitle" translation="[950,122]" width="900" maxLines="1" color="0x8391AAFF" />
+            <Group translation="[950,180]" clippingRect="[0,0,920,820]">
+                <Label id="infoText" width="900" wrap="true" lineSpacing="6" color="0xC3CDDEFF" />
+            </Group>
+            <Group id="infoFooter" translation="[950,1012]" />
+        </Group>
+        <OptionsMenu id="menu" visible="false" />
+        <Keyboard id="keyboard" visible="false" />
+
+        <Audio id="audio" />
+        <Timer id="clockTimer" duration="15" repeat="true" />
+        <Timer id="toastTimer" duration="3" />
+        <Timer id="playerTimer" duration="0.5" repeat="true" />
+        <Timer id="overlayTimer" duration="5" />
+        <Timer id="seekTimer" duration="0.7" />
+        <Timer id="subTimer" duration="0.05" repeat="true" />
+        <Timer id="upNextTimer" duration="1" repeat="true" />
+        <Timer id="musicTimer" duration="1" repeat="true" />
+        <Timer id="heroTimer" duration="0.35" />
+        <Timer id="focusTimer" duration="0.05" />
+        <Animation id="spin" duration="1.6" repeat="true" easeFunction="linear">
+            <FloatFieldInterpolator key="[0,1]" keyValue="[0,-6.2832]" fieldToInterp="spinnerRing.rotation" />
+        </Animation>
+        <Animation id="bodyScroll" duration="0.3" easeFunction="outCubic">
+            <Vector2DFieldInterpolator id="bodyScrollPath" key="[0,1]" keyValue="[[0,0],[0,0]]" fieldToInterp="detailsBody.translation" />
+        </Animation>
+        <Animation id="backdropIn" duration="0.45" easeFunction="outQuad">
+            <FloatFieldInterpolator id="backdropFadePath" key="[0,1]" keyValue="[0,0.6]" fieldToInterp="backdrop.opacity" />
+        </Animation>
+    </children>
+</component>

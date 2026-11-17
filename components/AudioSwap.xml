@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Plays a movie whose audio this Roku can't (DTS, TrueHD): the video comes
+     straight from the source, untouched, and the audio is replaced on the fly
+     by Dolby Digital from the user's own helper server. Serves the rebuilt
+     movie to the video player from 127.0.0.1. -->
+<component name="AudioSwap" extends="Task">
+    <interface>
+        <field id="request" type="assocarray" />
+        <field id="address" type="string" />
+        <field id="swapState" type="assocarray" />
+        <field id="quit" type="boolean" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/AudioSwap.brs" />
+</component>

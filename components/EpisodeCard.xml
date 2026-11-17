@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- An episode: still image on a bezel, number and name, air date and plot. -->
+<component name="EpisodeCard" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onContent" />
+        <field id="width" type="float" onChange="layout" />
+        <field id="height" type="float" onChange="layout" />
+        <field id="focusPercent" type="float" onChange="onFocus" />
+        <field id="gridHasFocus" type="boolean" onChange="onFocus" />
+        <field id="rowListHasFocus" type="boolean" onChange="onRowFocus" />
+        <field id="rowFocusPercent" type="float" onChange="onFocus" />
+        <field id="listHasFocus" type="boolean" onChange="onFocus" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/EpisodeCard.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Common.brs" />
+    <children>
+        <Group id="body">
+            <Poster id="glow" uri="pkg:/images/focus.9.png" opacity="0" />
+            <Poster id="bezel" uri="pkg:/images/card.9.png" />
+            <Poster id="still" loadDisplayMode="scaleToZoom" />
+            <Poster id="track" uri="pkg:/images/track.9.png" visible="false" />
+            <Poster id="bar" uri="pkg:/images/neon-bar.9.png" visible="false" />
+            <Poster id="check" uri="pkg:/images/pill.9.png" visible="false" />
+            <Label id="checkText" text="WATCHED" color="0x39FF88FF" horizAlign="center" vertAlign="center" visible="false" />
+            <Label id="title" color="0xDCE4F2FF" maxLines="1" />
+            <Label id="detail" color="0x8391AAFF" maxLines="1" />
+            <Label id="overview" color="0x8391AAFF" wrap="true" maxLines="3" />
+        </Group>
+    </children>
+</component>

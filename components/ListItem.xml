@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- One row of a list: icon or small art, a title, a detail line and a value
+     on the right, on a bezel strip that lights up neon when focused. -->
+<component name="ListItem" extends="Group">
+    <interface>
+        <field id="itemContent" type="node" onChange="onContent" />
+        <field id="width" type="float" onChange="layout" />
+        <field id="height" type="float" onChange="layout" />
+        <field id="focusPercent" type="float" onChange="onFocus" />
+        <field id="gridHasFocus" type="boolean" onChange="onFocus" />
+        <field id="listHasFocus" type="boolean" onChange="onFocus" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/ListItem.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Common.brs" />
+    <children>
+        <Group id="body">
+            <Poster id="strip" uri="pkg:/images/button.9.png" opacity="0.55" />
+            <Poster id="stripOn" uri="pkg:/images/button-on.9.png" opacity="0" />
+            <Poster id="glow" uri="pkg:/images/focus.9.png" opacity="0" />
+            <Poster id="icon" />
+            <Label id="number" color="0x56627AFF" horizAlign="right" vertAlign="center" />
+            <Label id="title" color="0xDCE4F2FF" maxLines="1" vertAlign="center" />
+            <Label id="detail" color="0x8391AAFF" maxLines="1" />
+            <Label id="value" color="0x8391AAFF" horizAlign="right" vertAlign="center" maxLines="1" />
+            <Poster id="playing" uri="pkg:/images/icon-play.png" width="26" height="26" blendColor="0x39FF88FF" visible="false" />
+        </Group>
+    </children>
+</component>

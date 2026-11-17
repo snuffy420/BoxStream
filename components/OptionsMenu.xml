@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A side panel of choices (sorting, versions, fixing a match...). -->
+<component name="OptionsMenu" extends="Group">
+    <interface>
+        <field id="title" type="string" onChange="onTitle" />
+        <field id="subtitle" type="string" onChange="onTitle" />
+        <field id="options" type="array" onChange="onOptions" />
+        <field id="chosen" type="assocarray" alwaysNotify="true" />
+        <field id="closed" type="boolean" alwaysNotify="true" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/OptionsMenu.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Common.brs" />
+    <children>
+        <Rectangle id="shade" width="1920" height="1080" color="0x00000099" />
+        <Poster id="panel" uri="pkg:/images/panel.9.png" translation="[1100,-20]" width="860" height="1120" />
+        <Rectangle id="edge" translation="[1110,40]" width="3" height="1000" color="0x39FF8866" />
+        <Label id="titleLabel" translation="[1170,84]" width="700" color="0xEEF4FFFF" />
+        <Label id="subtitleLabel" translation="[1170,136]" width="700" color="0x8391AAFF" wrap="true" maxLines="2" />
+        <MarkupList id="list" translation="[1146,196]" itemComponentName="ListItem" itemSize="[738,120]" itemSpacing="[0,0]" numRows="6" drawFocusFeedback="false" vertFocusAnimationStyle="floatingFocus" />
+        <Group id="footer" translation="[1170,1012]" />
+    </children>
+</component>

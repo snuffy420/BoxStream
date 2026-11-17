@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- A tiny web server on the Roku itself (127.0.0.1). The video player reads
+     the movie from here, and the relay fetches it from the server, so the
+     app can change the stream on its way to the player (DTS -> PCM). -->
+<component name="LocalRelay" extends="Task">
+    <interface>
+        <field id="request" type="assocarray" />
+        <field id="address" type="string" />
+        <field id="stats" type="assocarray" />
+        <field id="quit" type="boolean" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/LocalRelay.brs" />
+</component>

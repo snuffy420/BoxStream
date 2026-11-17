@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Reads subtitle text for the playing file, so Box://Stream draws subtitles
+     itself: lines from a text track inside an MKV (found through the file's
+     index), or a whole external .srt / .vtt file. -->
+<component name="SubtitleTask" extends="Task">
+    <interface>
+        <field id="request" type="assocarray" alwaysNotify="true" />
+        <field id="position" type="float" />
+        <field id="cues" type="assocarray" alwaysNotify="true" />
+    </interface>
+    <script type="text/brightscript" uri="pkg:/components/SubtitleTask.brs" />
+    <script type="text/brightscript" uri="pkg:/components/MediaProbe.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Pgs.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Bidi.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Vobsub.brs" />
+</component>
