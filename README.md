@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/icon.png" alt="Box://Stream icon" width="112"></p>
 <h1 align="center">Box://Stream</h1>
-<p align="center"><strong>Your seedbox, as a Roku streaming library</strong></p>
+<p align="center"><strong>HTTP/HTTPS, as a Roku streaming library</strong></p>
 <p align="center">Movies · TV Shows · Music · Subtitles · Optional DTS / TrueHD helper · Version 2.2.7</p>
 
 > **Your own files, your own server.** Box://Stream doesn't host, find or supply any media. It plays what is already on a server you control, such as a seedbox or any web server that lists its folders, and streams it straight to your Roku.
