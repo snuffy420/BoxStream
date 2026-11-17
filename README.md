@@ -14,8 +14,7 @@ Box://Stream reads your server's folder listings and builds a library of **Movie
 
 | Package | What you get | Download |
 | --- | --- | --- |
-| **Bundle** | The Roku app, the helper setup script and the install guide in one ZIP | [BoxStream-v2.2.7.zip](https://github.com/snuffy420/BoxStream/releases/download/v2.2.7/BoxStream-v2.2.7.zip) |
-| **Roku ZIP** | The sideloadable app; upload this ZIP directly to your Roku | [boxstream-v2.2.7-roku.zip](https://github.com/snuffy420/BoxStream/releases/download/v2.2.7/boxstream-v2.2.7-roku.zip) |
+| **Roku ZIP** | The Roku TV app; upload this ZIP directly to your Roku | [boxstream-v2.2.7-roku.zip](https://github.com/snuffy420/BoxStream/releases/download/v2.2.7/boxstream-v2.2.7-roku.zip) |
 | **Helper setup** | The optional helper's one-command Oracle Cloud setup | [boxstream-setup.sh](https://github.com/snuffy420/BoxStream/releases/download/v2.2.7/boxstream-setup.sh) |
 | **Source 7z** | Editable BrightScript, artwork, helper, build tools and documentation | [boxstream-v2.2.7-source.7z](https://github.com/snuffy420/BoxStream/releases/download/v2.2.7/boxstream-v2.2.7-source.7z) |
 
@@ -53,6 +52,18 @@ Each title has a details page with resume, start over, versions of the same movi
 
 ![A movie page](assets/screenshots/movie.jpg)
 
+### Media info
+
+Box://Stream reads the technical details straight from each file's own headers, so what it shows is the real file, not a guess from its name. **Media info** opens a MediaInfo-style sheet:
+
+- **General:** container format, file size, duration, overall bit rate, title and the tools that made the file.
+- **Video:** codec and profile, resolution, aspect ratio, frame rate and bit depth, plus HDR format, color primaries, color range and light levels on HDR files.
+- **Tracks and chapters:** how many audio and subtitle tracks there are, and the chapter list with times and names.
+
+The same details drive the resolution, codec, HDR, 10-bit and REMUX tags on the posters, and the warning before a file your Roku can't decode. While a movie plays, **OK > Media info** also shows your network speed.
+
+![The Media info sheet: general, video, tracks and chapters](assets/screenshots/media-info.jpg)
+
 ### Audio tracks, chosen sensibly
 
 Your language is remembered. In it, a track your Roku plays (such as a Dolby Digital compatibility track) comes before one that needs converting, and commentary and description tracks are skipped unless you pick them. The Audio menu shows each track's full name and what happens to it.
@@ -88,7 +99,7 @@ Most Rokus can't play DTS or Dolby TrueHD audio, and some play FLAC above 48 kHz
 - DTS and TrueHD become Dolby Digital. Stereo stays stereo and 7.1 becomes 5.1, or everything becomes stereo with **Settings > Helper > Converted audio in stereo** on.
 - Hi-res FLAC becomes 48 kHz.
 
-It runs on Oracle Cloud's free tier and is set up with one command in Oracle Cloud Shell, which creates the server and prints its address and a pairing code. Video never goes through it, and it only converts what your Roku can't play. Each server gets a random plain name, and `--remove NAME` deletes it again. See [helper/README.md](helper/README.md) and `INSTALL.txt` in the bundle.
+It runs on Oracle Cloud's free tier and is set up with one command in Oracle Cloud Shell, which creates the server and prints its address and a pairing code. Video never goes through it, and it only converts what your Roku can't play. Each server gets a random plain name, and `--remove NAME` deletes it again. See [helper/README.md](helper/README.md) and the step-by-step [INSTALL.txt](INSTALL.txt).
 
 If your Roku passes DTS through to a receiver, it plays DTS as it is; the app detects that by itself.
 
