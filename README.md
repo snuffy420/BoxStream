@@ -41,7 +41,7 @@ Open **Settings > Sources** and enter the web address of the folder that holds y
 
 Home opens on what you were watching and what was added last, with the selected title's artwork filling the screen. Posters, plots and cast come from IMDb data (via Cinemeta), TVmaze and Deezer, but your own `folder.jpg`, cover and poster images always come first. A wrong match can be fixed and anything can be hidden. Several sources can feed one library.
 
-![Home: Continue Watching and the selected title's artwork](assets/screenshots/home.jpg)
+![Home: Recently Added, with the selected title's logo and artwork filling the screen](assets/screenshots/home.jpg)
 
 The library is saved on the Roku, so it shows straight away at launch and survives updates. New, changed and removed files are picked up on start and every 30 minutes.
 
