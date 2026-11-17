@@ -99,7 +99,7 @@ Most Rokus can't play DTS or Dolby TrueHD audio, and some play FLAC above 48 kHz
 - DTS and TrueHD become Dolby Digital. Stereo stays stereo and 7.1 becomes 5.1, or everything becomes stereo with **Settings > Helper > Converted audio in stereo** on.
 - Hi-res FLAC becomes 48 kHz.
 
-It runs on Oracle Cloud's free tier and is set up with one command in Oracle Cloud Shell, which creates the server and prints its address and a pairing code. Video never goes through it, and it only converts what your Roku can't play. Each server gets a random plain name, and `--remove NAME` deletes it again. See [helper/README.md](helper/README.md) and the step-by-step [INSTALL.txt](INSTALL.txt).
+It runs on Oracle Cloud's free tier VM.Standard.E2.1.Micro server (1 GB memory) and is set up with one command in Oracle Cloud Shell, which creates the server and prints its address and a pairing code. Video never goes through it, and it only converts what your Roku can't play. Each server gets a random plain name, and `--remove NAME` deletes it again. See [helper/README.md](helper/README.md) and the step-by-step [INSTALL.txt](INSTALL.txt).
 
 If your Roku passes DTS through to a receiver, it plays DTS as it is; the app detects that by itself.
 
