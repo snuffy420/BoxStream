@@ -1,0 +1,9 @@
+{
+  "donateLabel": "Donate BTC",
+  "donateHint": "Scan the QR code with a wallet app",
+  "credit": "Created by snuffy420",
+  "donateUrl": "bc1qz8877p6vusc22qrctdj4h7w0uk2l9l9h8lwphy",
+  "projectUrl": "",
+  "donateQr": "pkg:/images/qr-donate.png",
+  "projectQr": ""
+}

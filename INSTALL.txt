@@ -1,0 +1,92 @@
+Box://Stream {VERSION} - install guide
+=========================================
+
+This download holds:
+  boxstream-v{VERSION}-roku.zip   the Roku app
+  boxstream-setup.sh            the optional helper's one-step setup (Oracle Cloud)
+  INSTALL.txt                   this guide
+
+
+1. INSTALL THE APP ON YOUR ROKU
+-------------------------------
+a) Turn on developer mode. On the Roku remote press:
+     Home x3, Up x2, Right, Left, Right, Left, Right
+   Follow the steps on screen, choose a password, and write down the address it
+   shows (for example http://192.168.1.50).
+
+b) On a computer on the same network, open that address in a web browser.
+   Sign in with the username  rokudev  and the password you chose.
+
+c) Click Upload, choose  boxstream-v{VERSION}-roku.zip , then click Install.
+   Box://Stream opens on the TV.
+
+Updating later: upload the newer zip the same way. Your settings and library
+are kept. (Removing the app deletes them.)
+
+
+2. ADD YOUR SERVER
+------------------
+In Box://Stream go to  Settings > Sources  and enter:
+  - the web address of the folder that holds your files (the page that lists
+    them when you open it in a web browser)
+  - its username and password, if it has them
+Tip: the Roku mobile app lets you type with your phone's keyboard.
+The first scan reads every folder; after that only changes are checked.
+
+
+3. OPTIONAL: THE HELPER (DTS, TrueHD, hi-res FLAC)
+--------------------------------------------------
+Most Rokus can't play DTS or Dolby TrueHD audio, and some play FLAC above
+48 kHz slowed down. The helper is your own small server that converts just
+that audio (video never goes through it). It runs on Oracle Cloud's Always
+Free tier, so it costs nothing.
+
+a) Make a free Oracle Cloud account at  https://signup.cloud.oracle.com
+   Oracle asks for a card to verify you; Always Free servers are never charged.
+   Pick a home region near you (it can't be changed later).
+
+b) Sign in to the Oracle Cloud console and open Cloud Shell:
+   the  >_  (Developer tools) icon at the top right, then Cloud Shell.
+
+c) Upload  boxstream-setup.sh : the gear icon at the top of Cloud Shell,
+   then Upload.
+
+d) Run:
+     bash boxstream-setup.sh
+
+   It takes 5-10 minutes and ends with:
+     Address:       https://<numbers>.sslip.io
+     Pairing code:  XXXXXXXX
+     Server name:   cedar-4821
+
+   KEEP THE SERVER NAME - you need it to remove the server later.
+
+e) On the Roku:  Settings > Helper
+     Address:      type the numbers on the number pad (use the - key for a
+                   group shorter than 3 digits); the rest is filled in
+     Pairing code: the 8 letters
+   then  Test helper . The Helper row then shows "Connected".
+
+Run  bash boxstream-setup.sh  again any time to see the address and code.
+
+To delete the helper server and everything it made:
+     bash boxstream-setup.sh --remove cedar-4821
+   (use your own server name; if you forget it, it's listed in the Oracle
+   console under Compute > Instances)
+
+Good to know:
+  - Always Free allows two of these small servers per account.
+  - "Out of capacity": Oracle has no free servers in your region right now.
+    Run the script again later.
+  - Oracle may reclaim Always Free servers that sit idle for a week; upgrading
+    the account to Pay As You Go stops that (Always Free stays free).
+
+
+CHECKING THE DOWNLOADS
+----------------------
+Each file on the release page has a .sha256 file beside it. To check one on
+Windows (PowerShell):
+     Get-FileHash boxstream-setup.sh -Algorithm SHA256
+on macOS / Linux:
+     shasum -a 256 boxstream-setup.sh
+The result should match the .sha256 file.

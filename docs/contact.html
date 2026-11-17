@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact · Box://Stream</title>
+  <meta name="description" content="Contact the developer of the Box://Stream Roku app." />
+  <style>
+    :root {
+      --bg-top: #060a12;
+      --bg-bottom: #0c1a33;
+      --panel: #121a2a;
+      --panel-deep: #0b111d;
+      --edge: #2a3650;
+      --green: #39ff88;
+      --cyan: #28dcff;
+      --text: #eef4ff;
+      --dim: #8b97b0;
+      --field: #070b14;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      background: radial-gradient(ellipse at 12% 0%, rgba(57, 255, 136, .10), transparent 45%),
+                  radial-gradient(ellipse at 100% 100%, rgba(40, 120, 255, .22), transparent 55%),
+                  linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--edge);
+      background: rgba(6, 10, 18, .7);
+    }
+    header img { width: 40px; height: 40px; }
+    header .title { line-height: 1.1; font-weight: 700; font-size: 1.15rem; }
+    header .title b { color: var(--green); }
+    header .title span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--dim); }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 16px 40px;
+    }
+    .card {
+      width: 100%;
+      max-width: 540px;
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-deep) 100%);
+      border: 1px solid var(--edge);
+      border-radius: 18px;
+      padding: 26px 26px 22px;
+      box-shadow: 0 0 0 1px rgba(40, 220, 255, .08), 0 20px 50px rgba(0, 0, 0, .5);
+    }
+    h1 { margin: 0; font-size: 1.8rem; }
+    .sub { color: var(--dim); font-size: 0.95rem; margin: 6px 0 18px; }
+    label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--green); margin: 14px 0 6px; }
+    input, select, textarea {
+      width: 100%;
+      background: var(--field);
+      border: 1px solid var(--edge);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 11px 13px;
+      font: inherit;
+      outline: none;
+    }
+    input::placeholder, textarea::placeholder { color: #56627a; }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(40, 220, 255, .18), 0 0 14px rgba(57, 255, 136, .18);
+    }
+    textarea { min-height: 140px; resize: vertical; }
+    button {
+      margin-top: 22px;
+      width: 100%;
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      padding: 13px;
+      font: inherit;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(57, 255, 136, .18), rgba(40, 220, 255, .14));
+      box-shadow: 0 0 16px rgba(57, 255, 136, .25);
+    }
+    button:hover, button:focus-visible { filter: brightness(1.15); outline: 2px solid var(--cyan); outline-offset: 2px; }
+    button:disabled { opacity: 0.6; cursor: wait; }
+    .note { margin-top: 16px; font-size: 0.8rem; color: var(--dim); line-height: 1.45; }
+    .ok, .err { display: none; margin-top: 14px; padding: 12px; border-radius: 10px; font-size: 0.9rem; }
+    .ok { background: rgba(57, 255, 136, .10); color: var(--green); border: 1px solid rgba(57, 255, 136, .45); }
+    .err { background: rgba(255, 80, 80, .12); color: #ff9a9a; border: 1px solid rgba(255, 80, 80, .45); }
+    a { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../assets/icon.png" alt="" width="40" height="40" />
+    <div class="title">Box<b>://</b>Stream<span>Your seedbox, as a Roku streaming library</span></div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Contact</h1>
+      <p class="sub">Bug reports, feature requests and custom builds for the Box://Stream Roku app.</p>
+
+      <!-- Messages go through Formspree to the developer's verified email, which is never shown on this page. -->
+      <form id="contactForm" action="https://formspree.io/f/myeekrpy" method="POST">
+        <input type="hidden" name="_subject" value="Box://Stream contact" />
+        <input type="hidden" name="app" value="Box://Stream (Roku) 2.2.7" />
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
+
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required maxlength="120" placeholder="Your name" />
+
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" required maxlength="200" placeholder="you@example.com" />
+
+        <label for="topic">Topic</label>
+        <select id="topic" name="topic">
+          <option value="bug">Bug report</option>
+          <option value="playback">A file that won't play</option>
+          <option value="helper">Helper / Oracle setup</option>
+          <option value="feature">Feature request</option>
+          <option value="custom">Custom build</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="roku">Roku model <span style="color:var(--dim);font-weight:400">(optional)</span></label>
+        <input id="roku" name="roku_model" type="text" maxlength="120" placeholder="e.g. Roku Express 4K, TCL Roku TV" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required maxlength="5000" placeholder="What happened, or what would you like to see? For a file that won't play, the codec details from Media info help."></textarea>
+
+        <button type="submit" id="submitBtn">SEND MESSAGE</button>
+      </form>
+
+      <div class="ok" id="ok" role="status">Thanks! Your message was sent.</div>
+      <div class="err" id="err" role="alert">Something went wrong sending your message. Please try again later.</div>
+
+      <p class="note">
+        Please don't send seedbox addresses, logins or helper pairing codes.
+        No personal email address is published here. Sent with
+        <a href="https://formspree.io" target="_blank" rel="noopener">Formspree</a>.
+        <br /><a href="https://github.com/snuffy420/BoxStream">Back to the project on GitHub</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const ok = document.getElementById('ok');
+    const err = document.getElementById('err');
+    const btn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.style.display = 'none';
+      err.style.display = 'none';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          ok.style.display = 'block';
+        } else {
+          err.style.display = 'block';
+        }
+      } catch (x) {
+        err.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
